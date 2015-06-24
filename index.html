@@ -1,78 +1,72 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Flask-Dance : Doing the OAuth dance with style using Flask, requests, and oauthlib.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Flask-Dance</title>
+    <meta charset="UTF-8">
+    <title>flask-dance by gregorynicholas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">flask-dance</h1>
+      <h2 class="project-tagline">doing the oauth dance with style.  flask, requests, oauthlib</h2>
+      <a href="https://github.com/gregorynicholas/flask-dance" class="btn">View on GitHub</a>
+      <a href="https://github.com/gregorynicholas/flask-dance/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/gregorynicholas/flask-dance/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/singingwolfboy/flask-dance">View on GitHub</a>
+    <section class="main-content">
+      <h1>
+<a id="flask-dance" class="anchor" href="#flask-dance" aria-hidden="true"><span class="octicon octicon-link"></span></a>flask-dance</h1>
 
-          <h1 id="project_title">Flask-Dance</h1>
-          <h2 id="project_tagline">Doing the OAuth dance with style using Flask, requests, and oauthlib.</h2>
+<p>doing the oauth dance with style.  flask, requests, oauthlib</p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/singingwolfboy/flask-dance/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/singingwolfboy/flask-dance/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>installation</h3>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+<p>the basics:</p>
 
-<p>Just the basics:</p>
-
-<pre><code>$ pip install Flask-Dance
+<pre><code>$ pip install flask-dance
 </code></pre>
 
-<p>Or if you're planning on using the built-in <a href="http://www.sqlalchemy.org/">SQLAlchemy</a> support:</p>
+<p>or if you're planning on using the built-in <a href="http://www.sqlalchemy.org/">sql-alchemy</a> support:</p>
 
-<pre><code>$ pip install Flask-Dance[models]
+<pre><code>$ pip install flask-dance[models]
 </code></pre>
 
-<h1>
-<a name="quickstart" class="anchor" href="#quickstart"><span class="octicon octicon-link"></span></a>Quickstart</h1>
+<h3>
+<a id="quickstart" class="anchor" href="#quickstart" aria-hidden="true"><span class="octicon octicon-link"></span></a>quickstart</h3>
 
-<p>For <a href="http://flask-dance.readthedocs.org/en/latest/contrib.html">a few popular OAuth providers</a>, Flask-Dance provides pre-set configurations. For
+<p>for <a href="http://flask-dance.readthedocs.org/en/latest/contrib.html">a few popular OAuth providers</a>, Flask-Dance provides pre-set configurations. For
 example, to authenticate with Github, just do the following:</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
-<span class="kn">from</span> <span class="nn">flask_dance.contrib.github</span> <span class="kn">import</span> <span class="n">make_github_blueprint</span><span class="p">,</span> <span class="n">github</span>
+<pre><code>python
+from flask import Flask, redirect, url_for
+from flask_dance.contrib.github import make_github_blueprint, github
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="s">"supersekrit"</span>
-<span class="n">blueprint</span> <span class="o">=</span> <span class="n">make_github_blueprint</span><span class="p">(</span>
-    <span class="n">client_id</span><span class="o">=</span><span class="s">"my-key-here"</span><span class="p">,</span>
-    <span class="n">client_secret</span><span class="o">=</span><span class="s">"my-secret-here"</span><span class="p">,</span>
-    <span class="n">redirect_to</span><span class="o">=</span><span class="s">"index"</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">"/login"</span><span class="p">)</span>
+app = Flask(__name__)
+app.secret_key = "supersekrit"
+blueprint = make_github_blueprint(
+    client_id="my-key-here",
+    client_secret="my-secret-here",
+    redirect_to="index",
+)
+app.register_blueprint(blueprint, url_prefix="/login")
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">github</span><span class="o">.</span><span class="n">authorized</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">"github.login"</span><span class="p">))</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">github</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/user"</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">ok</span>
-    <span class="k">return</span> <span class="s">"You are @{login} on Github"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">login</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"login"</span><span class="p">])</span>
+@app.route("/")
+def index():
+    if not github.authorized:
+        return redirect(url_for("github.login"))
+    resp = github.get("/user")
+    assert resp.ok
+    return "You are @{login} on Github".format(login=resp.json()["login"])
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
+if __name__ == "__main__":
+    app.run()
+</code></pre>
 
 <p><strong>NOTE</strong>: For this example to work, you must first <a href="https://github.com/settings/applications/new">register an application on Github</a>
 to get a <code>client_id</code> and <code>client_secret</code>. The application's authorization callback URL must be
@@ -91,7 +85,7 @@ pre-set configurations. <a href="http://flask-dance.readthedocs.org/en/latest/co
 providers.</a></p>
 
 <h1>
-<a name="token-storage" class="anchor" href="#token-storage"><span class="octicon octicon-link"></span></a>Token Storage</h1>
+<a id="token-storage" class="anchor" href="#token-storage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Token Storage</h1>
 
 <p>By default, OAuth access tokens are stored in Flask's session object. This means
 that if the user ever clears their browser cookies, they will have to go through
@@ -101,22 +95,21 @@ it's easy: just pass your database model and session to the blueprint.
 Flask-Dance even comes with a mixin to help you define your database model,
 and it works with User models, too!</p>
 
-<div class="highlight highlight-python"><pre><span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">flask_dance.models</span> <span class="kn">import</span> <span class="n">OAuthConsumerMixin</span>
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> flask_sqlalchemy <span class="pl-k">import</span> SQLAlchemy
+<span class="pl-k">from</span> flask_dance.models <span class="pl-k">import</span> OAuthConsumerMixin
 
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+db <span class="pl-k">=</span> SQLAlchemy()
 
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c"># ... other columns as needed</span>
+<span class="pl-k">class</span> <span class="pl-en">User</span>(<span class="pl-e">db.Model</span>):
+    <span class="pl-c1">id</span> <span class="pl-k">=</span> db.Column(db.Integer, <span class="pl-smi">primary_key</span><span class="pl-k">=</span><span class="pl-c1">True</span>)
+    <span class="pl-c"># ... other columns as needed</span>
 
-<span class="k">class</span> <span class="nc">OAuth</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">OAuthConsumerMixin</span><span class="p">):</span>
-    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+<span class="pl-k">class</span> <span class="pl-en">OAuth</span>(<span class="pl-e">db.Model</span>, <span class="pl-e">OAuthConsumerMixin</span>):
+    user_id <span class="pl-k">=</span> db.Column(db.Integer, db.ForeignKey(User.id))
+    user <span class="pl-k">=</span> db.relationship(User)
 
-<span class="c"># get_current_user() is a function that returns the current logged in user</span>
-<span class="n">blueprint</span><span class="o">.</span><span class="n">set_token_storage_sqlalchemy</span><span class="p">(</span><span class="n">OAuth</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">get_current_user</span><span class="p">)</span>
-</pre></div>
+<span class="pl-c"># get_current_user() is a function that returns the current logged in user</span>
+blueprint.set_token_storage_sqlalchemy(OAuth, db.session, <span class="pl-smi">user</span><span class="pl-k">=</span>get_current_user)</pre></div>
 
 <p>Flask-Dance can seamlessly integrate with <a href="http://pythonhosted.org/Flask-SQLAlchemy/">Flask-SQLAlchemy</a> for database
 integration, <a href="https://flask-login.readthedocs.org/">Flask-Login</a> for user management, and <a href="http://pythonhosted.org/Flask-Cache/">Flask-Cache</a> for caching.
@@ -124,18 +117,16 @@ However, none of these other extensions are required. You don't even have to
 use <a href="http://www.sqlalchemy.org/">SQLAlchemy</a> at all; if you'd prefer to use a different storage system,
 writing a custom integration is easy. <a href="http://flask-dance.readthedocs.org/en/latest/token-storage.html#custom-storage">See the documentation for how to
 use other token storage systems.</a></p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Flask-Dance maintained by <a href="https://github.com/singingwolfboy">singingwolfboy</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/gregorynicholas/flask-dance">flask-dance</a> is maintained by <a href="https://github.com/gregorynicholas">gregorynicholas</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
+
